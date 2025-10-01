@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Schedule | Oracle University</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1e40af;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e2e8f0 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h2 {
+            font-size: 2rem;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--gray-600);
+            font-size: 1.125rem;
+        }
+
+        .filters-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .filters-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .filters-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-input, .form-select {
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 3rem;
+        }
+
+        .days-container {
+            grid-column: 1 / -1;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .day-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .day-checkbox:hover {
+            background: var(--gray-100);
+            border-color: var(--primary-color);
+        }
+
+        .day-checkbox input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary-color);
+        }
+
+        .day-checkbox input[type="checkbox"]:checked + label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .day-checkbox.checked {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 2px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+            border-color: var(--gray-300);
+        }
+
+        .results-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+
+        .results-header {
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .results-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .schedule-table th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 1rem 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .schedule-table td {
+            padding: 1rem 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        .schedule-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .schedule-table tbody tr:nth-child(even) {
+            background: var(--gray-50);
+        }
+
+        .schedule-table tbody tr:nth-child(even):hover {
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--gray-600);
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-600);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid var(--gray-200);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .main-container {
+                padding: 0 1rem;
+            }
+
+            .filters-section {
+                padding: 1.5rem;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .crn-highlight {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .seats-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>
+                <div class="header-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                Master Schedule
+            </h1>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="page-title">
+            <h2>Course Schedule Browser</h2>
+            <p class="page-subtitle">Search and filter course sections by semester, department, time, and more</p>
+        </div>
+        
+        <div class="filters-section">
+            <div class="filters-header">
+                <i class="fas fa-filter" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                <h3 class="filters-title">Search Filters</h3>
+            </div>
+            
+            <div class="filters-grid">
+                <div class="form-group">
+                    <label for="semesterDropdown" class="form-label">
+                        <i class="fas fa-calendar"></i>
+                        Semester
+                    </label>
+                    <select id="semesterDropdown" class="form-select" onchange="loadCourseSections()">
+                        <option value="">-- Select Semester --</option>
+                        <?php foreach ($semesters as $semester): ?>
+                            <option value="<?= htmlspecialchars($semester['SemesterID']) ?>">
+                                <?= htmlspecialchars($semester['SemesterName'] . ' ' . $semester['SemesterYear']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="courseIDFilter" class="form-label">
+                        <i class="fas fa-book"></i>
+                        Course ID
+                    </label>
+                    <input type="text" id="courseIDFilter" class="form-input" placeholder="e.g., CS101">
+                </div>
+
+                <div class="form-group">
+                    <label for="crnFilter" class="form-label">
+                        <i class="fas fa-hashtag"></i>
+                        CRN
+                    </label>
+                    <input type="text" id="crnFilter" class="form-input" placeholder="Course Reference Number">
+                </div>
+
+                <div class="form-group">
+                    <label for="departmentFilter" class="form-label">
+                        <i class="fas fa-building"></i>
+                        Department
+                    </label>
+                    <select id="departmentFilter" class="form-select">
+                        <option value="">All Departments</option>
+                        <?php
+                        if ($deptsResult->num_rows > 0) {
+                            while ($row = $deptsResult->fetch_assoc()) {
+                                echo "<option value='{$row['DeptID']}'>{$row['DeptName']}</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="professorFilter" class="form-label">
+                        <i class="fas fa-user-tie"></i>
+                        Professor
+                    </label>
+                    <select id="professorFilter" class="form-select">
+                        <option value="">All Professors</option>
+                        <?php
+                        if($facultyResult->num_rows > 0){
+                            while ($row = $facultyResult->fetch_assoc()){
+                                echo "<option value='{$row['UserID']}'>{$row['LastName']}, {$row['FirstName']}</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeFilter" class="form-label">
+                        <i class="fas fa-clock"></i>
+                        Time Slot
+                    </label>
+                    <select id="timeFilter" class="form-select">
+                        <option value="">All Times</option>
+                        <?php
+                        if ($timeResult->num_rows > 0) {
+                            while ($row = $timeResult->fetch_assoc()) {
+                                $startTime = new DateTime($row['StartTime']);
+                                $endTime = new DateTime($row['EndTime']);
+                                $startTimeFormatted = $startTime->format('g:i A');
+                                $endTimeFormatted = $endTime->format('g:i A');
+                                echo "<option value='{$row['PeriodID']}'>{$startTimeFormatted} - {$endTimeFormatted}</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div class="form-group days-container">
+                    <label class="form-label">
+                        <i class="fas fa-calendar-week"></i>
+                        Days of Week
+                    </label>
+                    <div class="days-grid">
+                        <div class="day-checkbox" onclick="toggleDay(this)">
+                            <input type="checkbox" id="monday" name="day" value="2">
+                            <label for="monday">Monday</label>
+                        </div>
+                        <div class="day-checkbox" onclick="toggleDay(this)">
+                            <input type="checkbox" id="tuesday" name="day" value="3">
+                            <label for="tuesday">Tuesday</label>
+                        </div>
+                        <div class="day-checkbox" onclick="toggleDay(this)">
+                            <input type="checkbox" id="wednesday" name="day" value="4">
+                            <label for="wednesday">Wednesday</label>
+                        </div>
+                        <div class="day-checkbox" onclick="toggleDay(this)">
+                            <input type="checkbox" id="thursday" name="day" value="5">
+                            <label for="thursday">Thursday</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn btn-primary" onclick="loadCourseSections()">
+                    <i class="fas fa-search"></i>
+                    Search Courses
+                </button>
+                <button class="btn btn-secondary" onclick="clearFilters()">
+                    <i class="fas fa-times"></i>
+                    Clear Filters
+                </button>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="results-header">
+                <h3 class="results-title">
+                    <i class="fas fa-table"></i>
+                    Course Schedule Results
+                </h3>
+            </div>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                Loading course sections...
+            </div>
+            
+            <div class="table-container">
+                <table class="schedule-table" id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-hashtag"></i> CRN</th>
+                            <th><i class="fas fa-book"></i> Course Name</th>
+                            <th><i class="fas fa-code"></i> Course ID</th>
+                            <th><i class="fas fa-layer-group"></i> Section</th>
+                            <th><i class="fas fa-calendar-week"></i> Days</th>
+                            <th><i class="fas fa-clock"></i> Time</th>
+                            <th><i class="fas fa-door-open"></i> Room</th>
+                            <th><i class="fas fa-building"></i> Building</th>
+                            <th><i class="fas fa-user-tie"></i> Professor</th>
+                            <th><i class="fas fa-users"></i> Available Seats</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleTableBody">
+                        <tr>
+                            <td colspan="10" class="no-results">
+                                <div class="no-results-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h4>No courses selected</h4>
+                                <p>Please select a semester and apply filters to view course sections.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDay(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            element.classList.toggle('checked', checkbox.checked);
+        }
+
+        function clearFilters() {
+            document.getElementById('semesterDropdown').value = '';
+            document.getElementById('courseIDFilter').value = '';
+            document.getElementById('crnFilter').value = '';
+            document.getElementById('departmentFilter').value = '';
+            document.getElementById('professorFilter').value = '';
+            document.getElementById('timeFilter').value = '';
+            
+            // Clear day checkboxes
+            document.querySelectorAll('input[name="day"]').forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.closest('.day-checkbox').classList.remove('checked');
+            });
+            
+            // Clear table
+            const tableBody = document.getElementById('scheduleTableBody');
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="10" class="no-results">
+                        <div class="no-results-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>No courses selected</h4>
+                        <p>Please select a semester and apply filters to view course sections.</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function getSeatsIndicator(availableSeats) {
+            const seats = parseInt(availableSeats);
+            if (seats > 10) {
+                return `<span class="badge badge-success"><i class="fas fa-check-circle"></i> ${seats}</span>`;
+            } else if (seats > 0) {
+                return `<span class="badge badge-warning"><i class="fas fa-exclamation-triangle"></i> ${seats}</span>`;
+            } else {
+                return `<span class="badge badge-danger"><i class="fas fa-times-circle"></i> Full</span>`;
+            }
+        }
+
+        async function loadCourseSections() {
+            const semesterId = document.getElementById("semesterDropdown").value;
+            const loadingIndicator = document.getElementById("loadingIndicator");
+            const tableBody = document.getElementById("scheduleTableBody");
+
+            if (!semesterId) {
+                alert("Please select a semester.");
+                return;
+            }
+
+            // Show loading
+            loadingIndicator.classList.add('show');
+            tableBody.innerHTML = '';
+
+            const selectedDays = [];
+            const dayCheckboxes = document.querySelectorAll('input[name="day"]:checked');
+            dayCheckboxes.forEach(checkbox => {
+                selectedDays.push(checkbox.value);
+            });
+
+            const day = selectedDays.length ? selectedDays.join(",") : "";
+            const time = document.getElementById("timeFilter").value;
+            const courseID = document.getElementById("courseIDFilter").value;
+            const crn = document.getElementById("crnFilter").value;
+            const department = document.getElementById("departmentFilter").value;
+            const professor = document.getElementById("professorFilter").value;
+
+            const params = new URLSearchParams({
+                semester_id: semesterId,
+                day,
+                time,
+                course_id: courseID,
+                crn,
+                department,
+                professor
+            });
+
+            try {
+                const response = await fetch(`get_coursesections.php?${params.toString()}`);
+                const text = await response.text();
+                console.log(text);
+                const data = JSON.parse(text);
+
+                // Hide loading
+                loadingIndicator.classList.remove('show');
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="10" class="no-results">
+                                <div class="no-results-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <h4>No course sections found</h4>
+                                <p>Try adjusting your search filters to find more results.</p>
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    tableBody.innerHTML = '';
+                    data.forEach(section => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td><span class="crn-highlight">${section.CRN}</span></td>
+                            <td><strong>${section.CourseName}</strong></td>
+                            <td>${section.CourseID}</td>
+                            <td>${section.SectionNumber}</td>
+                            <td>${section.Days}</td>
+                            <td>${section.TimeSlot}</td>
+                            <td>${section.RoomNumber}</td>
+                            <td>${section.BuildingName}</td>
+                            <td>${section.Professor}</td>
+                            <td class="seats-indicator">${getSeatsIndicator(section.AvailableSeats)}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading course sections:", error);
+                loadingIndicator.classList.remove('show');
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="10" class="no-results">
+                            <div class="no-results-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h4>Error loading courses</h4>
+                            <p>Failed to load course sections. Please try again later.</p>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Initialize day checkboxes
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.day-checkbox input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    this.closest('.day-checkbox').classList.toggle('checked', this.checked);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

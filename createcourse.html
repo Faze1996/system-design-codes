@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #004080;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #af4c53;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Create New Course</h2>
+    <form action="create_course.php" method="POST">
+      
+      <div class="form-group">
+        <label for="CourseID">Course ID</label>
+        <input type="text" id="CourseID" name="CourseID" required>
+      </div>
+
+      <div class="form-group">
+        <label for="CourseName">Course Name</label>
+        <input type="text" id="CourseName" name="CourseName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="DeptID">Department ID</label>
+        <input type="text" id="DeptID" name="DeptID" required>
+      </div>
+
+      <div class="form-group">
+        <label for="NumberOfCredits">Number of Credits</label>
+        <input type="number" id="NumberOfCredits" name="NumberOfCredits" min="1" max="6" required>
+      </div>
+
+      <div class="form-group">
+        <label for="CourseDescription">Course Description</label>
+        <textarea id="CourseDescription" name="CourseDescription" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="CourseLevel">Course Level</label>
+        <select id="CourseLevel" name="CourseLevel" required>
+          <option value="">-- Select Level --</option>
+          <option value="Undergraduate">Undergraduate</option>
+          <option value="Graduate">Graduate</option>
+        </select>
+      </div>
+
+      <button type="submit">Create Course</button>
+    </form>
+  </div>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Hold | Oracle University</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #004080;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #d9534f;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c9302c;
+    }
+
+    .error {
+      border-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Add Hold to Student Record</h2>
+    <form id="holdForm" method="POST" action="addHold.php">
+      
+      <div class="form-group">
+        <label for="studentID">Student ID</label>
+        <input type="text" id="studentID" name="studentID" required />
+      </div>
+
+      <div class="form-group">
+        <label for="holdType">Hold Type</label>
+        <select id="holdType" name="holdType" required>
+          <option value="">Select Hold Type</option>
+          <option value="Financial">Financial</option>
+          <option value="Academic">Academic</option>
+          <option value="Disciplinary">Disciplinary</option>
+          <option value="Health">Health</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reason">Reason</label>
+        <textarea id="reason" name="reason" placeholder="Provide a brief reason for the hold..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="effectiveDate">Effective Date</label>
+        <input type="date" id="effectiveDate" name="effectiveDate" required />
+      </div>
+
+      <button type="submit">Add Hold</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('holdForm').addEventListener('submit', function(event) {
+      const studentID = document.getElementById('studentID');
+      const holdType = document.getElementById('holdType');
+      const reason = document.getElementById('reason');
+      const effectiveDate = document.getElementById('effectiveDate');
+
+      let valid = true;
+
+      [studentID, holdType, reason, effectiveDate].forEach(field => {
+        field.classList.remove('error');
+        if (!field.value.trim()) {
+          field.classList.add('error');
+          valid = false;
+        }
+      });
+
+      if (!valid) {
+        event.preventDefault();
+        alert('Please fill out all fields before submitting.');
+        return;
+      }
+
+      const confirmSubmit = confirm('Are you sure you want to add this hold?');
+      if (!confirmSubmit) {
+        event.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>

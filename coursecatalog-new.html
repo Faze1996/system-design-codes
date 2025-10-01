@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Catalog | Oracle University</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="coursecatalog.css">
+</head>
+<body>
+    <header>
+        <h1>Course Catalog</h1>
+        <a href="/logout.php">Logout</a>
+    </header>
+
+    <main>
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="Search by Course ID or Name">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Department</th>
+                    <th>Credits</th>
+                    <th>Level</th>
+                    <th>Description</th>
+                    <th>Prerequisites</th>
+                </tr>
+            </thead>
+            <tbody id="courseTableBody"></tbody>
+        </table>
+    </main>
+
+    <script src="coursecatalog.js" defer></script>
+</body>
+</html>

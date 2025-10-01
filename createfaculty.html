@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Faculty</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create Faculty</h2>
+    <form id="facultyForm">
+      <label for="SpecialtyType">Specialty Type</label>
+      <input type="text" id="SpecialtyType" name="SpecialtyType" required />
+
+      <label for="FacultyRank">Faculty Rank</label>
+      <select id="FacultyRank" name="FacultyRank" required>
+        <option value="">Select Rank</option>
+        <option value="Assistant Professor">Assistant Professor</option>
+        <option value="Associate Professor">Associate Professor</option>
+        <option value="Professor">Professor</option>
+        <option value="Lecturer">Lecturer</option>
+      </select>
+
+      <label for="FacultyType">Faculty Type</label>
+      <select id="FacultyType" name="FacultyType" required>
+        <option value="">Select Type</option>
+        <option value="Full-Time">Full-Time</option>
+        <option value="Part-Time">Part-Time</option>
+        <option value="Adjunct">Adjunct</option>
+      </select>
+
+      <label for="Department">Department</label>
+      <input type="text" id="Department" name="Department" required />
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+  <script>
+    document.getElementById('facultyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const specialty = document.getElementById('SpecialtyType').value.trim();
+      const rank = document.getElementById('FacultyRank').value;
+      const type = document.getElementById('FacultyType').value;
+      const dept = document.getElementById('Department').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (!specialty || !rank || !type || !dept) {
+        errorMsg.textContent = "Please fill out all fields.";
+        return;
+      }
+
+      errorMsg.textContent = "";
+      alert("Faculty profile created successfully!");
+
+      // You can add actual submission logic here (e.g., AJAX or form.submit())
+    });
+  </script>
+
+</body>
+</html>

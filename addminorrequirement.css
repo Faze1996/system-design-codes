@@ -1,0 +1,8 @@
+/* Styles for Add Minor Requirement page */
+body { font-family: Arial, sans-serif; background:#f5f5f5; padding:30px; margin:0 }
+.card { max-width:500px; margin:40px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+h2 { margin-top:0 }
+label { display:block; margin-top:12px; font-weight:600 }
+input, select { width:100%; padding:8px; margin-top:4px; border:1px solid #ccc; border-radius:6px }
+button { margin-top:16px; padding:10px 14px; background:#16a34a; color:white; border:none; border-radius:6px; cursor:pointer }
+button:hover { background:#15803d }

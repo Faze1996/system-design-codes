@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+    .info-group {
+      margin: 10px 0;
+    }
+    .label {
+      font-weight: bold;
+      display: inline-block;
+      width: 150px;
+    }
+    .actions {
+      margin-top: 30px;
+    }
+    .actions button {
+      margin-right: 10px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+    .edit { background-color: #4CAF50; color: white; }
+    .password { background-color: #2196F3; color: white; }
+    .back { background-color: #f44336; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Faculty Profile</h1>
+
+    <h2>Personal Information</h2>
+    <div class="info-group"><span class="label">Full Name:</span> —</div>
+    <div class="info-group"><span class="label">Gender:</span> —</div>
+    <div class="info-group"><span class="label">Date Of Birth:</span> —</div>
+    <div class="info-group"><span class="label">Phone Number:</span> —</div>
+    <div class="info-group"><span class="label">Email:</span> —</div>
+
+    <h2>Home Address</h2>
+    <div class="info-group"><span class="label">Address:</span> —</div>
+    <div class="info-group"><span class="label">City:</span> —</div>
+    <div class="info-group"><span class="label">State:</span> —</div>
+    <div class="info-group"><span class="label">Zip Code:</span> —</div>
+
+    <h2>Department Information</h2>
+    <div class="info-group"><span class="label">Department:</span> —</div>
+    <div class="info-group"><span class="label">Faculty Type:</span> —</div>
+
+    <div class="actions">
+      <button class="edit" onclick="editInfo()">✏️ Edit Information</button>
+      <button class="password" onclick="changePassword()">🔑 Change Password</button>
+      <button class="back" onclick="goBack()">⬅️ Go Back</button>
+    </div>
+  </div>
+
+  <script>
+    function editInfo() {
+      alert("Redirecting to edit information form...");
+      // window.location.href = "edit-profile.html"; // Uncomment and set correct path
+    }
+
+    function changePassword() {
+      alert("Redirecting to change password page...");
+      // window.location.href = "change-password.html"; // Uncomment and set correct path
+    }
+
+    function goBack() {
+      window.history.back(); // Navigates to the previous page
+    }
+  </script>
+</body>
+</html>
+
+

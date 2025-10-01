@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Department</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create Department</h2>
+    <form id="departmentForm">
+      <label for="RoomID">Room ID</label>
+      <input type="text" id="RoomID" name="RoomID" required />
+
+      <label for="ChairID">Chair ID</label>
+      <input type="text" id="ChairID" name="ChairID" required />
+
+      <label for="DeptManager">Department Manager</label>
+      <input type="text" id="DeptManager" name="DeptManager" required />
+
+      <label for="Email">Email</label>
+      <input type="email" id="Email" name="Email" required />
+
+      <label for="PhoneNumber">Phone Number</label>
+      <input type="tel" id="PhoneNumber" name="PhoneNumber" required />
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+  <script>
+    document.getElementById('departmentForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent actual form submission
+
+      const roomID = document.getElementById('RoomID').value.trim();
+      const chairID = document.getElementById('ChairID').value.trim();
+      const deptManager = document.getElementById('DeptManager').value.trim();
+      const email = document.getElementById('Email').value.trim();
+      const phone = document.getElementById('PhoneNumber').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      // Simple validation
+      if (!roomID || !chairID || !deptManager || !email || !phone) {
+        errorMsg.textContent = "Please fill out all fields.";
+        return;
+      }
+
+      if (!email.includes('@')) {
+        errorMsg.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        errorMsg.textContent = "Phone number must be 10 digits.";
+        return;
+      }
+
+      errorMsg.textContent = "";
+      alert("Department created successfully!");
+
+      // You can add actual form submission logic here (e.g., AJAX or form.submit())
+    });
+  </script>
+
+</body>
+</html>

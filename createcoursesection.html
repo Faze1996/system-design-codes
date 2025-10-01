@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Course Section</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .day-options {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .day-options label {
+      font-weight: normal;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create Course Section</h2>
+    <form method="POST" action="createCourseSection.php">
+      
+      <div class="form-group">
+        <label for="CourseID">Course ID</label>
+        <input type="text" id="CourseID" name="CourseID" required />
+      </div>
+
+      <div class="form-group">
+        <label for="FacultyID">Faculty ID</label>
+        <input type="text" id="FacultyID" name="FacultyID" required />
+      </div>
+
+      <div class="form-group">
+        <label for="RoomID">Room ID</label>
+        <input type="text" id="RoomID" name="RoomID" required />
+      </div>
+
+      <div class="form-group">
+        <label for="SemesterID">Semester ID</label>
+        <input type="text" id="SemesterID" name="SemesterID" required />
+      </div>
+
+      <div class="form-group">
+        <label>Day</label>
+        <div class="day-options">
+          <div>
+            <input type="checkbox" id="monday" name="Day[]" value="Monday" />
+            <label for="monday">Monday</label>
+          </div>
+          <div>
+            <input type="checkbox" id="tuesday" name="Day[]" value="Tuesday" />
+            <label for="tuesday">Tuesday</label>
+          </div>
+          <div>
+            <input type="checkbox" id="wednesday" name="Day[]" value="Wednesday" />
+            <label for="wednesday">Wednesday</label>
+          </div>
+          <div>
+            <input type="checkbox" id="thursday" name="Day[]" value="Thursday" />
+            <label for="thursday">Thursday</label>
+          </div>
+          <div>
+            <input type="checkbox" id="friday" name="Day[]" value="Friday" />
+            <label for="friday">Friday</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="TimeSlotID">Time Slot ID</label>
+        <input type="text" id="TimeSlotID" name="TimeSlotID" required />
+      </div>
+
+      <button type="submit">Create Section</button>
+    </form>
+  </div>
+
+</body>
+</html>
+

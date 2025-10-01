@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Grade | Oracle University</title>
+    <link rel="stylesheet" href="editgrade.css">
+</head>
+<body>
+<div class="container">
+    <h2>Edit Grade</h2>
+    <div id="message" class="alert" style="display:none;" role="status" aria-live="polite"></div>
+
+    <form id="edit-grade-form">
+        <label for="grade">Grade</label>
+        <input type="text" id="grade" name="grade" placeholder="A, B, C, D, F, W" required>
+
+        <div id="current-grade" class="current-grade" style="display:none">Current Grade: <span id="current-grade-val"></span></div>
+
+        <button type="submit" class="btn">Update Grade</button>
+    </form>
+
+    <a href="manageStudents.php" class="btn back-btn">Back</a>
+</div>
+
+<script src="editgrade.js" defer></script>
+</div>
+</body>
+</html>

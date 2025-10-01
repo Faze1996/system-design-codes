@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Department Dashboard | Oracle University</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="mangefaculty.css">
+</head>
+<body>
+    <header class="header">
+        <a href="/admin/landing.php" class="logout-btn">Return to Admin Dashboard</a>
+        <h1>Department Dashboard (Admin Mode)</h1>
+    </header>
+
+    <main class="main-container">
+        <h2>Faculty Members in <span id="dept-name">Department</span> Department</h2>
+
+        <div id="messages" class="messages" aria-live="polite"></div>
+
+        <!-- Add Faculty Form -->
+        <form id="add-faculty-form">
+            <label for="faculty_id">Add Faculty:</label>
+            <select name="add_faculty_id" id="faculty_id">
+                <option value="">-- Select Faculty --</option>
+                <!-- Options will be populated by mangefaculty.js -->
+            </select>
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+
+        <!-- Current Faculty Table -->
+        <form id="faculty-list-form">
+            <table class="faculty-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Specialty</th>
+                        <th>Rank</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="faculty-list">
+                    <!-- Rows will be populated by mangefaculty.js -->
+                </tbody>
+            </table>
+        </form>
+    </main>
+
+    <script src="mangefaculty.js" defer></script>
+    </body>
+    </html>

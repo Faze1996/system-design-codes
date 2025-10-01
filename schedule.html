@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Schedule Viewer</title>
+    <link rel="stylesheet" href="schedule.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Faculty Schedule Viewer</h1>
+        <label for="semesterDropdown">Select Semester:</label>
+        <select id="semesterDropdown">
+            <option value="">-- Choose Semester --</option>
+            <!-- options populated by schedule.js -->
+        </select>
+        <table id="scheduleTable"></table>
+        <div id="message"></div>
+    </div>
+    <script src="schedule.js" defer></script>
+</body>
+</html>

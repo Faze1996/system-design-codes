@@ -1,0 +1,53 @@
+/* managestudent.css */
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #eef2f7;
+    color: #222;
+}
+
+header {
+    background: #1e3a8a;
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 { font-size: 22px; margin: 0; }
+
+.back-btn {
+    background: #e11d48;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.back-btn:hover { background: #be123c; }
+
+main {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+h2 { margin-bottom: 15px; font-size: 20px; color: #1e3a8a; }
+
+select { width: 100%; padding: 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 20px; }
+
+.btn { display: inline-block; background: #2563eb; color: white; padding: 8px 14px; border-radius: 5px; text-decoration: none; font-size: 14px; margin-top: 10px; transition: 0.2s; }
+.btn:hover { background: #1d4ed8; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+
+th, td { border: 1px solid #e5e7eb; padding: 12px; text-align: left; }
+th { background: #2563eb; color: #fff; }
+tr:nth-child(even) { background: #f9fafb; }
+
+footer { text-align: center; padding: 15px; margin-top: 30px; background: #1e3a8a; color: white; font-size: 14px; }

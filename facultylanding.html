@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard | Oracle University</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="facultylanding.css">
+</head>
+<body>
+
+<header>
+    <h1>Faculty Dashboard (Admin Mode)</h1>
+</header>
+
+<main>
+    <div class="dashboard">
+        <h2>Welcome, <span id="user-firstname">User</span>!</h2>
+        <p>You are viewing <strong id="faculty-name">Faculty Name</strong>’s Faculty Dashboard.</p>
+
+        <div class="cards">
+            <a href="/admin/facultyView/manageStudents.php" class="card">
+                <div class="card-icon">👩‍🎓</div>
+                <span>Manage Students</span>
+            </a>
+            <a href="/admin/facultyView/manageAdvisor.php" class="card">
+                <div class="card-icon">📋</div>
+                <span>Manage Advisor</span>
+            </a>
+            <a href="/admin/facultyView/schedule.php" class="card">
+                <div class="card-icon">📅</div>
+                <span>Faculty Schedule</span>
+            </a>
+            <a href="/admin/facultyView/masterSchedule.php" class="card">
+                <div class="card-icon">📘</div>
+                <span>Master Schedule</span>
+            </a>
+        </div>
+
+    <a href="/admin/landing.php" class="btn-back">Return to Admin Dashboard</a>
+    </div>
+</main>
+
+<script src="facultylanding.js" defer></script>
+</body>
+</html>
+

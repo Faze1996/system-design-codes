@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Department Dashboard | Oracle University</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+<header>
+  <h1>Admin Department Dashboard</h1>
+  <a href="/admin/landing.php" class="btn">Return to Admin</a>
+</header>
+
+<main>
+  <p class="welcome">
+    👋 Hello, <strong id="user-firstname">User</strong>!
+    You are viewing the <strong id="dept-name">Department</strong> Department Dashboard.
+  </p>
+
+  <div class="cards">
+    <a href="/admin/departmentView/manageFaculty.php" class="card">
+      <div class="card-icon">👩‍🏫</div>
+      Manage Faculty
+    </a>
+    <a href="/admin/departmentView/departmentInformation.php" class="card">
+      <div class="card-icon">📖</div>
+      Department Info
+    </a>
+    <a href="/admin/departmentView/departmentMajors.php" class="card">
+      <div class="card-icon">🎓</div>
+      Department Majors
+    </a>
+    <a href="/admin/departmentView/departmentMinors.php" class="card">
+      <div class="card-icon">📘</div>
+      Department Minors
+    </a>
+  </div>
+</main>
+
+<script src="landing.js" defer></script>
+
+
+</body>
+</html>

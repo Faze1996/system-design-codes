@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Minor Requirements | Oracle University</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="viewminorrequirements.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Minor Requirements: <span id="minor-name">Minor Name</span></h1>
+        <a href="/admin/departmentView/landing.php" class="btn btn-danger">Back to Dashboard</a>
+    </div>
+
+    <div class="container">
+        <h2><span id="minor-name-2">Minor Name</span> - Course Requirements</h2>
+        <p><strong>Credits Required:</strong> <span id="credits-required">0</span></p>
+        <a id="add-req-link" href="addMinorRequirement.php?MinorID=MINOR_ID" class="btn btn-success">+ Add Requirement</a>
+
+        <div id="requirements-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Minimum Grade</th>
+                        <th>Requirement Type</th>
+                    </tr>
+                </thead>
+                <tbody id="requirements-list">
+                    <!-- Rows will be injected here by client code or server-side rendering -->
+                </tbody>
+            </table>
+            <p id="no-data" class="no-data" style="display:none;">No course requirements have been added for this minor yet.</p>
+        </div>
+    </div>
+
+    <script src="viewminorrequirements.js" defer></script>
+</body>
+</html>

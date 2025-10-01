@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Degree Audit Report</title>
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --success-green: #059669;
+            --warning-orange: #d97706;
+            --danger-red: #dc2626;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-600: #4b5563;
+            --gray-900: #111827;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+        
+        .report-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .report-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary-blue);
+        }
+        
+        .university-name {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .report-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .student-section {
+            padding: 2rem;
+            border-bottom: 2px solid var(--gray-100);
+        }
+        
+        .student-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .student-details, .program-details {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-blue);
+        }
+        
+        .detail-group {
+            margin-bottom: 1rem;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+        
+        .detail-value {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+        }
+        
+        .summary-section {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+            border-bottom: 2px solid var(--gray-100);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .summary-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--gray-100);
+            background: white;
+        }
+        
+        .summary-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .completed-card .summary-number { color: var(--success-green); }
+        .remaining-card .summary-number { color: var(--danger-red); }
+        .progress-card .summary-number { color: var(--secondary-blue); }
+        
+        .courses-section {
+            padding: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-icon {
+            margin-right: 0.75rem;
+            font-size: 1.5rem;
+        }
+        
+        .courses-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .courses-table th {
+            background: var(--gray-900);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .courses-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .courses-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        .course-name {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+        
+        .credits-badge {
+            background: var(--secondary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .grade-badge {
+            background: var(--success-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 50px;
+            display: inline-block;
+        }
+        
+        .pending-badge {
+            background: var(--warning-orange);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--gray-600);
+            font-style: italic;
+            background: var(--gray-50);
+            border-radius: 8px;
+            border: 2px dashed var(--gray-100);
+        }
+        
+        .report-footer {
+            padding: 2rem;
+            background: var(--gray-900);
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        @media print {
+            body { background: white; }
+            .report-container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <?php 
+    $totalCourses = count($completedCourses) + count($remainingCourses);
+    $completedCount = count($completedCourses);
+    $progressPercent = $totalCourses > 
+    <div class="report-container">
+        <div class="report-header">
+            <div class="university-name">Academic Institution</div>
+            <h1 class="report-title">Degree Audit Report</h1>
+            <div class="report-subtitle">Official Academic Progress Review</div>
+        </div>
+        
+        <div class="student-section">
+            <div class="student-grid">
+                <div class="student-details">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-blue);">Student Information</h3>
+                    <div class="detail-group">
+                        <div class="detail-label">Full Name</div>
+                        <div class="detail-value"><?= htmlspecialchars($student['name']) ?></div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Email Address</div>
+                        <div class="detail-value"><?= htmlspecialchars($student['email']) ?></div>
+                    </div>
+                </div>
+                
+                <div class="program-details">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-blue);">Program Information</h3>
+                    <div class="detail-group">
+                        <div class="detail-label">Major Program</div>
+                        <div class="detail-value"><?= htmlspecialchars($program['majorname']) ?></div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Audit Date</div>
+                        <div class="detail-value"><?= date('F j, Y') ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="summary-section">
+            <div class="summary-grid">
+                <div class="summary-card completed-card">
+                    <div class="summary-number"><?= $completedCount ?></div>
+                    <div class="summary-label">Completed Courses</div>
+                </div>
+                <div class="summary-card remaining-card">
+                    <div class="summary-number"><?= count($remainingCourses) ?></div>
+                    <div class="summary-label">Remaining Courses</div>
+                </div>
+                <div class="summary-card progress-card">
+                    <div class="summary-number"><?= $progressPercent ?>%</div>
+                    <div class="summary-label">Progress Complete</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="courses-section">
+            <h2 class="section-title">
+                <span class="section-icon">✅</span>
+                Completed Coursework
+            </h2>
+            
+            <?php if (count($completedCourses) > 
+                <table class="courses-table">
+                    <thead>
+                        <tr>
+                            <th>Course Title</th>
+                            <th>Credit Hours</th>
+                            <th>Final Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($completedCourses as $course): ?>
+                            <tr>
+                                <td class="course-name"><?= htmlspecialchars($course['coursename']) ?></td>
+                                <td><span class="credits-badge"><?= htmlspecialchars($course['credits']) ?></span></td>
+                                <td><span class="grade-badge"><?= htmlspecialchars($course['grade']) ?></span></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <div class="empty-message">
+                    No completed courses on record. Begin your academic journey by enrolling in required courses.
+                </div>
+            <?php endif; ?>
+        </div>
+        
+        <div class="courses-section">
+            <h2 class="section-title">
+                <span class="section-icon">📋</span>
+                Outstanding Requirements
+            </h2>
+            
+            <?php if (count($remainingCourses) > 
+                <table class="courses-table">
+                    <thead>
+                        <tr>
+                            <th>Required Course</th>
+                            <th>Credit Hours</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($remainingCourses as $course): ?>
+                            <tr>
+                                <td class="course-name"><?= htmlspecialchars($course['coursename']) ?></td>
+                                <td><span class="credits-badge"><?= htmlspecialchars($course['credits']) ?></span></td>
+                                <td><span class="pending-badge">Not Completed</span></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <div class="empty-message">
+                    🎉 Congratulations! All degree requirements have been successfully completed.
+                </div>
+            <?php endif; ?>
+        </div>
+        
+        <div class="report-footer">
+            This is an unofficial degree audit report generated on <?= date('F j, Y \a\t g:i A') ?>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Department | Oracle University</title>
+    <link rel="stylesheet" href="editdepartment.css">
+</head>
+<body>
+
+<header>
+    <h1>Edit Department</h1>
+    <a href="/admin/landing.php">← Back to Dashboard</a>
+</header>
+
+<main>
+    <div id="message-area"></div>
+
+    <h2 id="edit-heading">Update Department Information</h2>
+
+    <form id="edit-dept-form" method="POST" action="#" novalidate>
+        <div class="form-group">
+            <label for="DeptName">Department Name</label>
+            <input type="text" id="DeptName" name="DeptName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="DeptChair">Department Chair</label>
+            <select id="DeptChair" name="DeptChair" required>
+                <!-- options populated by editdepartment.js -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="DeptManager">Department Manager</label>
+            <select id="DeptManager" name="DeptManager" required>
+                <!-- options populated by editdepartment.js -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email Address</label>
+            <input type="email" id="Email" name="Email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="text" id="PhoneNumber" name="PhoneNumber" required>
+        </div>
+
+        <button type="submit" id="save-dept-btn">💾 Save Changes</button>
+    </form>
+</main>
+
+<script src="editdepartment.js" defer></script>
+</main>
+
+</body>
+</html>

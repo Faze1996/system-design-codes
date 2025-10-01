@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <title>Add Minor Requirement</title>
+  <link rel="stylesheet" href="addminorrequirement.css">
+</head>
+<body>
+  <div class="card">
+    <h2>Add Minor Requirement</h2>
+
+    <form method="POST" action="add_minor_requirement.php">
+      <label for="minorName">Minor Name</label>
+      <input type="text" id="minorName" name="minorName" required placeholder="e.g., Mathematics">
+
+      <label for="courseID">Course ID</label>
+      <input type="text" id="courseID" name="courseID" required placeholder="e.g., MATH201">
+
+      <label for="minimumGrade">Minimum Grade</label>
+      <select id="minimumGrade" name="minimumGrade" required>
+        <option value="">-- Select Grade --</option>
+        <option value="A+">A+</option>
+        <option value="A">A</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B">B</option>
+        <option value="B-">B-</option>
+        <option value="C+">C+</option>
+        <option value="C">C</option>
+        <option value="C-">C-</option>
+        <option value="D">D</option>
+        <option value="F">F</option>
+      </select>
+
+      <label for="groupID">Group ID</label>
+      <input type="number" id="groupID" name="groupID" min="1" required placeholder="e.g., 1">
+
+      <button type="submit">Add Requirement</button>
+    </form>
+  </div>
+</body>
+</html>

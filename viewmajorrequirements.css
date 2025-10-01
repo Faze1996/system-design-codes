@@ -1,0 +1,52 @@
+/* viewmajorrequirements.css - styles derived from the minor template */
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+.header {
+    background: #006699;
+    color: #fff;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header h1 { margin: 0; font-size: 20px; }
+.btn {
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+}
+.btn-danger { background: #c62828; }
+.btn-primary { background: #006699; }
+.btn-success { background: #2e7d32; }
+.btn:hover { opacity: 0.9; }
+.container {
+    max-width: 900px;
+    margin: 25px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+th {
+    background: #006699;
+    color: #fff;
+}
+tr:nth-child(even) { background: #f9f9f9; }
+tr:hover { background: #f1f1f1; }
+.no-data { text-align: center; color: #666; margin: 20px 0; }

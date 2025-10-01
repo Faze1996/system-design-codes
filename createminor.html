@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Minor | Oracle University</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="createminor.css">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+
+<div class="container">
+    <h1>Create a New Minor</h1>
+
+    <div id="message" aria-live="polite"></div>
+
+    <form id="create-minor-form" method="POST" action="#" novalidate>
+        <label for="minor_name">Minor Name:</label>
+        <input type="text" id="minor_name" name="minor_name" required>
+
+        <label for="credits_required">Credits Required:</label>
+        <input type="number" id="credits_required" name="credits_required" min="1" required>
+
+        <button type="submit" id="create-minor-btn">Create Minor</button>
+    </form>
+
+    <a href="/admin/departmentView/landing.php" class="back-btn">Return to Department Dashboard</a>
+</div>
+
+<script src="createminor.js" defer></script>
+
+</body>
+</html>

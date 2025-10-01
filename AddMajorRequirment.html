@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Major / Create Major</title>
+    <link rel="stylesheet" href="addmajorrequirement.css">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+
+    <div class="form-box">
+        <h1>Create Major</h1>
+
+        <div id="message" aria-live="polite"></div>
+
+        <form id="create-major-form" method="POST" action="#" novalidate>
+            <label for="major_name">Major Name:</label>
+            <input type="text" id="major_name" name="major_name" required>
+
+            <label for="credits_required">Credits Required:</label>
+            <input type="number" id="credits_required" name="credits_required" min="1" required>
+
+            <button type="submit" id="submit-btn">Create Major</button>
+        </form>
+
+        <a href="/admin/departmentView/landing.php" class="back-btn">⬅ Return to Dashboard</a>
+    </div>
+
+    <script>
+      // simple client-side handler (simulated); replace action with server endpoint when ready
+      document.getElementById('create-major-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        var name = document.getElementById('major_name').value.trim();
+        var credits = document.getElementById('credits_required').value;
+        var msg = document.getElementById('message'); msg.innerHTML = '';
+        if (!name || !credits || credits <= 0){
+          msg.innerHTML = '<p class="message error">Please fill in valid values.</p>';
+          return;
+        }
+        msg.innerHTML = '<p class="message success">Major created (simulated).</p>';
+        this.reset();
+      });
+    </script>
+
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Add Major Requirement</title>
+  <link rel="stylesheet" href="addmajorrequirement.css">
+  <style>
+    /* small override to use a different button color for Major (optional) */
+    .card button{ background:#2563eb }
+    .card button:hover{ background:#1e4ed8 }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Add Major Requirement</h2>
+
+    <div id="message" aria-live="polite"></div>
+
+    <form id="add-major-form" method="POST" action="#" novalidate>
+      <label for="majorName">Major Name</label>
+      <input type="text" id="majorName" name="majorName" required placeholder="e.g., Computer Science">
+
+      <label for="courseID">Course ID</label>
+      <input type="text" id="courseID" name="courseID" required placeholder="e.g., CS101">
+
+      <label for="minimumGrade">Minimum Grade</label>
+      <select id="minimumGrade" name="minimumGrade" required>
+        <option value="">-- Select Grade --</option>
+        <option value="A+">A+</option>
+        <option value="A">A</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B">B</option>
+        <option value="B-">B-</option>
+        <option value="C+">C+</option>
+        <option value="C">C</option>
+        <option value="C-">C-</option>
+        <option value="D">D</option>
+        <option value="F">F</option>
+      </select>
+
+      <label for="groupID">Group ID</label>
+      <input type="number" id="groupID" name="groupID" min="1" required placeholder="e.g., 1">
+
+      <button type="submit" id="submit-btn">Add Requirement</button>
+    </form>
+  </div>
+
+  <script src="addmajorrequirement.js" defer></script>
+</body>
+</html>

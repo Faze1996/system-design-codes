@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Department Majors | Oracle University</title>
+    <link rel="stylesheet" href="departmentmarjors.css">
+</head>
+<body>
+
+<header>
+    <a href="/admin/departmentView/landing.php" class="btn danger">Back to Department Dashboard</a>
+    <h1 id="dept-title">Department Majors</h1>
+</header>
+
+<main>
+    <h2 id="majors-heading">Majors in the Department</h2>
+
+    <table aria-describedby="majors-heading">
+      <thead>
+        <tr>
+          <th>Major ID</th>
+          <th>Major Name</th>
+          <th>Credits Required</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <div id="no-majors" class="info" style="display:none">No majors found for this department.</div>
+      <tbody id="majors-container">
+        <!-- rows will be populated by departmentmajors.js when MAJORS_DATA is available -->
+      </tbody>
+    </table>
+
+    <div class="center">
+        <a id="create-major-link" href="#" class="btn">+ Create New Major</a>
+    </div>
+</main>
+<script src="departmentmajors.js" defer></script>
+</body>
+</html>

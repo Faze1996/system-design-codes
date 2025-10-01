@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Attendance | Oracle University</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="editattendence.css">
+</head>
+<body>
+
+    <h1>Edit Attendance</h1>
+
+    <div class="form-container">
+        <div id="error" class="error" style="display:none;" aria-live="polite"></div>
+
+        <!-- Date Selector -->
+        <form id="date-form">
+            <input type="hidden" name="crn" id="crn-input" value="">
+            <label for="classDate"><b>Select Class Date:</b></label>
+            <select name="classDate" id="classDate" required>
+                <option value="">-- Choose Date --</option>
+                <!-- Options populated by editattendence.js -->
+            </select>
+        </form>
+
+        <!-- Attendance Table -->
+        <form id="attendance-form">
+            <input type="hidden" name="crn" id="attendance-crn" value="">
+            <input type="hidden" name="classDate" id="attendance-classDate" value="">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Present</th>
+                    </tr>
+                </thead>
+                <tbody id="students-list">
+                    <!-- Rows injected by editattendence.js -->
+                </tbody>
+            </table>
+
+            <div style="margin-top:12px;">
+                <button type="submit" class="btn">✅ Update Attendance</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="editattendence.js" defer></script>
+</head>
+<body>
+</html>
+
+    

@@ -1,0 +1,13 @@
+/* Styles for Department Information page */
+body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; color: #333; }
+header { background: #2c7a7b; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+.header h1 { font-size: 24px; margin: 0; }
+.logout-btn { padding: 10px 20px; background-color: #d9534f; color: white; border: none; border-radius: 4px; text-decoration: none; font-size: 16px; }
+.logout-btn:hover { background-color: #c9302c; }
+.main-container { max-width: 800px; width: 100%; background-color: #fff; padding: 20px; margin: 20px auto; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); }
+h2 { margin-bottom: 15px; color: #4CAF50; }
+.dept-info { margin-bottom: 20px; font-size: 18px; }
+.dept-info p { margin: 10px 0; }
+footer { background-color: #004080; color: #fff; text-align: center; padding: 10px 0; position: fixed; bottom: 0; width: 100%; }
+.edit-btn { display: inline-block; padding: 12px 25px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; transition: background-color 0.3s; }
+.edit-btn:hover { background-color: #0056b3; }

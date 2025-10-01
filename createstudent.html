@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Student</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create Student</h2>
+    <form id="studentForm">
+      <label for="StudentYear">Student Year</label>
+      <select id="StudentYear" name="StudentYear" required>
+        <option value="">Select Year</option>
+        <option value="Freshman">Freshman</option>
+        <option value="Sophomore">Sophomore</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+      </select>
+
+      <label for="StudentType">Student Type</label>
+      <select id="StudentType" name="StudentType" required>
+        <option value="">Select Type</option>
+        <option value="Full-Time">Full-Time</option>
+        <option value="Part-Time">Part-Time</option>
+      </select>
+
+      <label for="StudentMajor">Student Major</label>
+      <input type="text" id="StudentMajor" name="StudentMajor" required />
+
+      <label for="StudentMinor">Student Minor</label>
+      <input type="text" id="StudentMinor" name="StudentMinor" />
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+  <script>
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const year = document.getElementById('StudentYear').value;
+      const type = document.getElementById('StudentType').value;
+      const major = document.getElementById('StudentMajor').value.trim();
+      const minor = document.getElementById('StudentMinor').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (!year || !type || !major) {
+        errorMsg.textContent = "Please fill out all required fields.";
+        return;
+      }
+
+      errorMsg.textContent = "";
+      alert("Student profile created successfully!");
+
+      // You can add actual submission logic here (e.g., AJAX or form.submit())
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard | Oracle University</title>
+    <link rel="stylesheet" href="managestudent.css">
+</head>
+<body>
+
+<header>
+    <h1>Faculty Dashboard</h1>
+    <a href="/admin/facultyView/landing.php" class="back-btn">Go Back</a>
+</header>
+
+    <main>
+    <h2>Courses Taught</h2>
+    <select id="courseDropdown">
+        <option value="">-- Select a Course --</option>
+        <!-- Course options will be populated by managestudent.js -->
+    </select>
+
+    <a id="attendanceBtn" href="#" class="btn" style="display:none;">Edit Attendance</a>
+
+    <h2>Enrolled Students</h2>
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Edit Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="3">Please select a course.</td></tr>
+        </tbody>
+    </table>
+
+    <div id="error" style="color:red; display:none;"></div>
+</main>
+
+    <script src="managestudent.js" defer></script>
+
+</body>
+</html>

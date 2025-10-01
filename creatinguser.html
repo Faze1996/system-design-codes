@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Create User | Admin Panel</title>
+        <link rel="stylesheet" href="creatinguser.css">
+    </head>
+    <body>
+
+    <header>
+    <h1>Edit Department</h1>
+    <a href="/admin/landing.php">← Back to Dashboard</a>
+    </header>
+        <main class="form-container" role="main">
+            <h2>Create New User</h2>
+
+            <div id="messages" aria-live="polite"></div>
+
+            <form id="create-user-form" action="createUser.php" method="POST" novalidate>
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9\-\s()+]*">
+
+                <fieldset class="address-group" aria-label="Address">
+                    <legend class="visually-hidden">Address</legend>
+
+                    <label for="house_apt">House / Apt #</label>
+                    <input type="text" id="house_apt" name="house_apt" placeholder="House or apartment number">
+
+                    <label for="street">Street</label>
+                    <input type="text" id="street" name="street" placeholder="Street address">
+
+                    <div class="grid">
+                        <div>
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" placeholder="City">
+                        </div>
+                        <div>
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" placeholder="State">
+                        </div>
+                    </div>
+
+                    <label for="zip_code">ZIP Code</label>
+                    <input type="text" id="zip_code" name="zip_code" placeholder="ZIP / Postal code" pattern="[0-9A-Za-z\- ]*">
+                </fieldset>
+
+                <label for="user_type">User Type</label>
+                <select id="user_type" name="user_type" required>
+                    <option value="A">Admin</option>
+                    <option value="F">Faculty</option>
+                    <option value="S" selected>Student</option>
+                </select>
+
+                <!-- Backwards-compatible camelCase field if some server code expects `userType` -->
+                <input type="hidden" name="userType" id="userType" value="S">
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">Prefer not to say</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="6">
+
+                <button type="submit" class="primary">Create User</button>
+            </form>
+
+            <a href="/admin/landing.php" class="back-btn" aria-label="Back to dashboard">← Back to Dashboard</a>
+                </main>
+
+                <script>
+                    // Keep hidden camelCase userType in sync with the user_type select
+                    (function(){
+                        const userTypeSelect = document.getElementById('user_type');
+                        const userTypeHidden = document.getElementById('userType');
+                        if (userTypeSelect && userTypeHidden){
+                            userTypeSelect.addEventListener('change', function(){
+                                userTypeHidden.value = this.value;
+                            });
+                        }
+                    })();
+                </script>
+
+        </body>
+        </html>
