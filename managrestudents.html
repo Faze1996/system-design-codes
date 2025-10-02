@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: #718096;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input, .form-select {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .students-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .students-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .students-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .students-count {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .students-grid {
+            padding: 2rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .student-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .student-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .student-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .student-id-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .student-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .student-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .edit-btn {
+            background: #48bb78;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #38a169;
+            transform: translateY(-1px);
+        }
+
+        .delete-btn {
+            background: #f56565;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #e53e3e;
+            transform: translateY(-1px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #718096;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .search-bar {
+            margin: 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                position: static;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .student-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .student-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>🎓 Student Management</h1>
+            <p>Comprehensive student information system</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="form-header">
+                    <h2 class="form-title">Add New Student</h2>
+                    <p class="form-subtitle">Enter student information below</p>
+                </div>
+
+                <form method="POST" action="" id="studentForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="FirstName">First Name *</label>
+                            <input type="text" id="FirstName" name="FirstName" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="LastName">Last Name *</label>
+                            <input type="text" id="LastName" name="LastName" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="MiddleName">Middle Name</label>
+                            <input type="text" id="MiddleName" name="MiddleName" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="UserID">User ID *</label>
+                            <input type="text" id="UserID" name="UserID" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="StudentID">Student ID *</label>
+                            <input type="text" id="StudentID" name="StudentID" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="DOB">Date of Birth *</label>
+                            <input type="date" id="DOB" name="DOB" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="Gender">Gender *</label>
+                            <select id="Gender" name="Gender" class="form-select" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="PhoneNumber">Phone Number *</label>
+                            <input type="tel" id="PhoneNumber" name="PhoneNumber" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="StudentYear">Academic Year *</label>
+                            <select id="StudentYear" name="StudentYear" class="form-select" required>
+                                <option value="">Select Year</option>
+                                <option value="Freshman">Freshman</option>
+                                <option value="Sophomore">Sophomore</option>
+                                <option value="Junior">Junior</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Graduate">Graduate</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="StudentType">Student Type *</label>
+                            <select id="StudentType" name="StudentType" class="form-select" required>
+                                <option value="">Select Type</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Online">Online</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="HouseAptNumber">House/Apt Number *</label>
+                            <input type="text" id="HouseAptNumber" name="HouseAptNumber" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="Street">Street *</label>
+                            <input type="text" id="Street" name="Street" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="City">City *</label>
+                            <input type="text" id="City" name="City" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="State">State *</label>
+                            <input type="text" id="State" name="State" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="ZipCode">Zip Code *</label>
+                            <input type="text" id="ZipCode" name="ZipCode" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="UserType">User Type *</label>
+                            <input type="text" id="UserType" name="UserType" class="form-input" value="Student" readonly>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        ➕ Add Student
+                    </button>
+                </form>
+            </div>
+
+            <!-- Students Section -->
+            <div class="students-section">
+                <div class="students-header">
+                    <h2 class="students-title">Student Directory</h2>
+                    <p class="students-count" id="studentCount">
+                        <?php 
+                        $count = isset($_SESSION['students']) ? count($_SESSION['students']) : 0;
+                        echo $count . ' student' . ($count !== 1 ? 's' : '') . ' registered';
+                        ?>
+                    </p>
+                </div>
+
+                <div class="search-bar">
+                    <div class="search-icon">🔍</div>
+                    <input type="text" class="search-input" placeholder="Search students by name, ID, or year..." id="searchInput">
+                </div>
+
+                <div class="students-grid" id="studentsGrid">
+                    <?php
+                    if (isset($_SESSION['students']) && count($_SESSION['students'])
+                       
+                    <div class="student-card" data-student='<?= json_encode($student) ?>'>
+                        <div class="student-header">
+                            <div class="student-name">
+                                <?= htmlspecialchars($student['FirstName'] . ' ' . $student['LastName']) ?>
+                            </div>
+                            <div class="student-id-badge">
+                                ID: <?= htmlspecialchars($student['StudentID']) ?>
+                            </div>
+                        </div>
+
+                        <div class="student-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Academic Year</div>
+                                <div class="detail-value"><?= htmlspecialchars($student['StudentYear']) ?></div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Student Type</div>
+                                <div class="detail-value"><?= htmlspecialchars($student['StudentType']) ?></div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Phone</div>
+                                <div class="detail-value"><?= htmlspecialchars($student['PhoneNumber']) ?></div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Gender</div>
+                                <div class="detail-value"><?= htmlspecialchars($student['Gender']) ?></div>
+                            </div>
+                            <div class="detail-item" style="grid-column: 1 / -1;">
+                                <div class="detail-label">Address</div>
+                                <div class="detail-value">
+                                    <?= htmlspecialchars($student['HouseAptNumber'] . ', ' . $student['Street'] . ', ' . $student['City'] . ', ' . $student['State'] . ' ' . $student['ZipCode']) ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="student-actions">
+                            <button class="action-btn edit-btn" onclick="editStudent(<?= $index ?>)">
+                                ✏️ Edit
+                            </button>
+                            <a class="action-btn delete-btn" href="?delete=<?= $index ?>" onclick="return confirmDelete('<?= htmlspecialchars($student['FirstName'] . ' ' . $student['LastName']) ?>')">
+                                🗑️ Delete
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                        endforeach;
+                    else:
+                    ?>
+                    <div class="empty-state">
+                        <div class="empty-icon">👥</div>
+                        <h3>No Students Found</h3>
+                        <p>Start by adding your first student using the form on the left.</p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const studentCards = document.querySelectorAll('.student-card');
+            
+            studentCards.forEach(card => {
+                const studentData = JSON.parse(card.dataset.student);
+                const searchableText = (
+                    studentData.FirstName + ' ' +
+                    studentData.LastName + ' ' +
+                    studentData.StudentID + ' ' +
+                    studentData.StudentYear + ' ' +
+                    studentData.StudentType
+                ).toLowerCase();
+                
+                if (searchableText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Form validation
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#f56565';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e2e8f0';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // Edit student function
+        function editStudent(index) {
+            // This would typically open a modal or redirect to an edit page
+            alert('Edit functionality would be implemented here for student index: ' + index);
+        }
+
+        // Confirm delete
+        function confirmDelete(studentName) {
+            return confirm(`Are you sure you want to delete ${studentName}? This action cannot be undone.`);
+        }
+
+        // Auto-format phone number
+        document.getElementById('PhoneNumber').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{0,3})/, '($1) $2');
+            }
+            this.value = value;
+        });
+
+        // Form reset after successful submission
+        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($error)): ?>
+        document.getElementById('studentForm').reset();
+        <?php endif; ?>
+    </script>
+</body>
+</html>

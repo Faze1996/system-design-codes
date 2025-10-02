@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses Catalog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f3f4f6;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .course-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+    .course-card:hover {
+      transform: translateY(-3px);
+    }
+    .course-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .course-header h2 {
+      font-size: 18px;
+      margin: 0;
+      color: #1e40af;
+    }
+    .course-header small {
+      color: #666;
+    }
+    .course-body {
+      margin-top: 12px;
+      display: none;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .course-body span {
+      display: block;
+      margin: 4px 0;
+    }
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: #2563eb;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Available Courses</h1>
+
+  <?php if ($result->
+    <?php while ($row = $result->
+      <div class="course-card">
+        <div class="course-header" onclick="toggleCourse('<?php echo $row['CourseID']; ?>')">
+          <h2><?php echo htmlspecialchars($row['CourseName']); ?> (<?php echo htmlspecialchars($row['CourseID']); ?>)</h2>
+          <small><?php echo htmlspecialchars($row['DeptID']); ?> • <?php echo htmlspecialchars($row['NumberOfCredits']); ?> credits</small>
+        </div>
+        <div id="course-<?php echo $row['CourseID']; ?>" class="course-body">
+          <span><strong>Course Level:</strong> <?php echo htmlspecialchars($row['CourseLevel']); ?></span>
+          <span><strong>Description:</strong> <?php echo htmlspecialchars($row['CourseDescription']); ?></span>
+          <?php
+          $details = getCourseDetails($conn, $row['CourseID']);
+          if ($details): ?>
+            <span><strong>Prerequisite Course ID:</strong> <?php echo htmlspecialchars($details['PrerequisitesCourseID']); ?></span>
+            <span><strong>Minimum Grade:</strong> <?php echo htmlspecialchars($details['MinimumGrade']); ?></span>
+          <?php else: ?>
+            <span><em>No additional details available.</em></span>
+          <?php endif; ?>
+          <button class="toggle-btn" onclick="toggleCourse('<?php echo $row['CourseID']; ?>')">Hide Details</button>
+        </div>
+      </div>
+    <?php endwhile; ?>
+  <?php else: ?>
+    <p style="text-align: center; color:#555;">No courses available.</p>
+  <?php endif; ?>
+
+  <script>
+    function toggleCourse(courseID) {
+      const body = document.getElementById("course-" + courseID);
+      body.style.display = (body.style.display === "block") ? "none" : "block";
+    }
+  </script>
+</body>
+</html>
+
+
+                                    
+
+
